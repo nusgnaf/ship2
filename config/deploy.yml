@@ -12,8 +12,8 @@ servers:
 registry:
   # Specify the registry server, if you're not using Docker Hub
   # server: registry.digitalocean.com / ghcr.io / ...
-  server: http://192.168.10.110:5000
-  username: my-user
+  server: 192.168.10.110:5000
+  username: fang
 
   # Always use an access token rather than real password when possible.
   password:
