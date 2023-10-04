@@ -2,6 +2,7 @@ ARG APP_ROOT=/src/app
 ARG RUBY_VERSION=3.2.2
 
 FROM ruby:${RUBY_VERSION}-alpine AS base
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
 ARG APP_ROOT
 
 RUN apk add --no-cache build-base sqlite-dev
@@ -12,6 +13,7 @@ COPY Gemfile Gemfile.lock ${APP_ROOT}/
 WORKDIR ${APP_ROOT}
 RUN gem install bundler:2.4.19 \
     && bundle config --local deployment 'true' \
+    && bundle config set --global mirror.https://rubygems.org https://gems.ruby-china.com \
     && bundle config --local frozen 'true' \
     && bundle config --local no-cache 'true' \
     && bundle config --local without 'development test' \
@@ -24,6 +26,7 @@ RUN gem install bundler:2.4.19 \
 RUN bundle exec bootsnap precompile --gemfile app/ lib/
 
 FROM ruby:${RUBY_VERSION}-alpine
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
 ARG APP_ROOT
 
 RUN apk add --no-cache shared-mime-info tzdata sqlite-libs

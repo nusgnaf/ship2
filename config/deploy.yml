@@ -33,9 +33,7 @@ ssh:
 
 # Configure builder setup.
 builder:
-  remote:
-    arch: amd64
-    host: ssh://rocky@192.168.10.110
+  multiarch: false
 #   args:
 #     RUBY_VERSION: 3.2.0
 #   secrets:
