@@ -12,7 +12,7 @@ servers:
 registry:
   # Specify the registry server, if you're not using Docker Hub
   # server: registry.digitalocean.com / ghcr.io / ...
-  server: 192.168.10.110:5000
+  server: http://192.168.10.110:5000
   username: my-user
 
   # Always use an access token rather than real password when possible.
@@ -37,14 +37,14 @@ ssh:
 
 # Configure builder setup.
 builder:
-  multiarch: false
+  remote:
+    arch: amd64
+    host: ssh://rocky@192.168.10.110
+  # multiarch: false
 #   args:
 #     RUBY_VERSION: 3.2.0
 #   secrets:
 #     - GITHUB_TOKEN
-#   remote:
-#     arch: amd64
-#     host: ssh://app@192.168.0.1
 
 # Use accessory services (secrets come from .env).
 # accessories:
@@ -78,7 +78,7 @@ builder:
 # Configure a custom healthcheck (default is /up on port 3000)
 healthcheck:
   max_attempts: 7
-  interval: 20s
+  interval: 5s
 #   path: /healthz
 #   port: 4000
 
