@@ -5,7 +5,7 @@ FROM ruby:${RUBY_VERSION}-alpine AS base
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
 ARG APP_ROOT
 
-RUN apk add --no-cache build-base sqlite-dev
+RUN apk add --no-cache build-base sqlite-dev curl
 
 RUN mkdir -p ${APP_ROOT}
 COPY Gemfile Gemfile.lock ${APP_ROOT}/
