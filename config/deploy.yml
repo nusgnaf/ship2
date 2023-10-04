@@ -76,7 +76,9 @@ builder:
 #     accesslog.format: json
 
 # Configure a custom healthcheck (default is /up on port 3000)
-# healthcheck:
+healthcheck:
+  max_attempts: 7
+  interval: 20s
 #   path: /healthz
 #   port: 4000
 
